@@ -20,7 +20,7 @@ int main() {
         output_arr[0] = (res / base_2 + 0x30);
 
         if (res % base_2 > 9) {
-            output_arr[1] = (res % base_2 + 0x36);
+            output_arr[1] = (res % base_2 + 0x37);
         }
         else {
             output_arr[1] = (res % base_2 + 0x30);
