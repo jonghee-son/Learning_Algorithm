@@ -11,16 +11,12 @@ int main() {
     int* arr = malloc(a * 6);
 
     for (int i = 0; i < a; i++) {
-        scanf("%s", &arr);
-    }
-
-    while (arr[d] != ' ') {
-        
+        scanf("%d", &arr[i]);
     }
 
     for (int i = 0; i < a; i++) {
-        if (arr < b) {
-            printf("%d ", c);
+        if (arr[i] < b) {
+            printf("%d ", arr[i]);
         }
     }
 
