@@ -1,20 +1,28 @@
 #include <iostream>
+#include <math.h>
 using namespace std;
 
 int main() {
     int num;
-    int count = 0;
+    int count;
 
     cin >> num;
+
+    count = num;
 
     for (int i = 0; i < num; i++) {
         int ans;
 
         cin >> ans;
+
+        if (ans == 1) {
+            count--;
+        }
         
-        if (ans / 2 == 1 || ans / 3 == 1 || (ans % 2 != 0 && ans % 3 != 0)) {
-            if (ans != 1) {
-                count++;
+        for(int j = 2; j <= sqrt(ans); j++) {
+            if(ans % j == 0) {
+                count--;
+                break;
             }
         }
     }
