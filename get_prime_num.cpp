@@ -10,12 +10,19 @@ int main() {
     for (int i = begin; i <= end; i++) {
         flag = 1;
 
+        if (i == 1) {
+            flag = 0;
+            goto done;
+        }
+
         for (int j = 2; j <= sqrt(i); j++) {
-            if (i % j == 0 | i == 1) {
+            if (i % j == 0 || i == 1) {
                 flag = 0;
                 break;
             }
         }
+
+        done:
 
         if (flag == 1) {
             cout << i << '\n';
