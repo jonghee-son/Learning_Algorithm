@@ -42,7 +42,7 @@ int main() {
                 if (deq.empty()) {
                     cout << "error" << '\n';
                     err = true;
-                    continue;
+                    break;
                 }
                 else if (rev == true) {
                     deq.pop_back();
@@ -54,7 +54,7 @@ int main() {
             else {
                 cout << "error" << '\n';
                 err = true;
-                continue;
+                break;
             }
         }
 
