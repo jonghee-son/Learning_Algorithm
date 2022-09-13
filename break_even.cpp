@@ -10,13 +10,9 @@ int main() {
         int res = a / (c - b) + 1;
 
         cout << res << '\n';
-
-        return 0;
     }
     else {
         cout << -1 << '\n';
-
-        return -1;
     }
 
     return 0;
