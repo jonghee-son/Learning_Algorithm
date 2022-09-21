@@ -67,15 +67,15 @@ int main() {
     cin >> node >> edge;
     cin >> source;
     
-    Graph g(node);
+    Graph gp(node);
 
     while(edge--) {
         int u, v, w;
         cin >> u >> v >> w;
-        g.addEdge(u - 1, v - 1, w);
+        gp.addEdge(u - 1, v - 1, w);
     }
 
-    g.shortestPath(source - 1);
+    gp.shortestPath(source - 1);
 
     return 0;
 }
