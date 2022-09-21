@@ -2,9 +2,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define INF 0x3f3f3f3f
+#define INF 100000
 
 class Graph {
+    private:
         int V; 
 
         list<pair<int, int> >* adj;
@@ -24,7 +25,6 @@ Graph::Graph(int V) {
 
 void Graph::addEdge(int u, int v, int w) {
     adj[u].push_back(make_pair(v, w));
-    adj[v].push_back(make_pair(u, w));
 }
 
 void Graph::shortestPath(int src) {
@@ -51,25 +51,31 @@ void Graph::shortestPath(int src) {
         }
     }
 
-    for (int i = 0; i < V; ++i)
-        cout << dist[i] << '\n';
+    for (int i = 0; i < V; ++i) {
+        if (dist[i] != INF) {
+            cout << dist[i] << '\n';
+        }
+        else {
+            cout << "INF" << '\n';
+        }
+    }
 }
 
 int main() {
-    int node, branch, start;
+    int node, edge, source;
 
-    cin >> node >> branch;
-    cin >> start;
+    cin >> node >> edge;
+    cin >> source;
     
     Graph g(node);
 
-    while(branch--) {
+    while(edge--) {
         int u, v, w;
         cin >> u >> v >> w;
-        g.addEdge(u, v, w);
+        g.addEdge(u - 1, v - 1, w);
     }
 
-    g.shortestPath(start);
+    g.shortestPath(source - 1);
 
     return 0;
 }
