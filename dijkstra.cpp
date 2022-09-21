@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define INF 100000
+#define INF 1000000
 
 class Graph {
     private:
