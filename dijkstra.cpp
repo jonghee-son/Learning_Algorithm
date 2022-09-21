@@ -1,20 +1,58 @@
 #include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-#include <limits.h>
 
-int INF = 1000000;
+#define INF 0x3f3f3f3f
 
-int minDistance(int dist[], bool sptSet[], int node){
-    int min = INF, minIndex;
+class Graph {
+        int V; 
 
-    for (int i = 0; i < node; i++) {
-        if (sptSet[i] == false && dist[i] < min) {
-            min = dist[i];
-            minIndex = i;
+        list<pair<int, int> >* adj;
+ 
+    public:
+        Graph(int V); 
+
+        void addEdge(int u, int v, int w);
+
+        void shortestPath(int s);
+};
+
+Graph::Graph(int V) {
+    this->V = V;
+    adj = new list<pair<int, int>>[V];
+}
+
+void Graph::addEdge(int u, int v, int w) {
+    adj[u].push_back(make_pair(v, w));
+    adj[v].push_back(make_pair(u, w));
+}
+
+void Graph::shortestPath(int src) {
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+ 
+    vector<int> dist(V, INF);
+ 
+    pq.push(make_pair(0, src));
+    dist[src] = 0;
+ 
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        pq.pop();
+ 
+        list<pair<int, int> >::iterator i;
+        for (i = adj[u].begin(); i != adj[u].end(); ++i) {
+            int v = (*i).first;
+            int weight = (*i).second;
+
+            if (dist[v] > dist[u] + weight) {
+                dist[v] = dist[u] + weight;
+                pq.push(make_pair(dist[v], v));
+            }
         }
     }
 
-    return minIndex;
+    for (int i = 0; i < V; ++i)
+        cout << dist[i] << '\n';
 }
 
 int main() {
@@ -22,45 +60,16 @@ int main() {
 
     cin >> node >> branch;
     cin >> start;
-    int arr[node][node] = {0,};
+    
+    Graph g(node);
 
     while(branch--) {
         int u, v, w;
         cin >> u >> v >> w;
-        arr[u - 1][v - 1] = w;
+        g.addEdge(u, v, w);
     }
 
-    for (int k = 0; k < node; k++) {
-        int dist[node];
-        bool sptSet[node];
-
-        for (int i = 0; i < node; i++) {
-            dist[i] = INF;
-            sptSet[i] = false;
-        }
-
-        dist[start - 1] = 0;
-
-        for (int i = 0; i < node - 1; i++) {
-            int minDist = minDistance(dist, sptSet, node);
-
-            sptSet[i] = true;
-
-            for (int j = 0; j < node; j++) {
-                if (!sptSet[j] && arr[minDist][j] && dist[minDist] != INF && dist[minDist] + arr[minDist][j] < dist[j]) {
-                    dist[j] = dist[minDist] + arr[minDist][j];
-                }
-            }
-        }
-
-        
-        if (dist[k] == INF) {
-            cout << "INF" << '\n';
-        }
-        else {
-            cout << dist[k] << '\n';
-        }
-    }
+    g.shortestPath(start);
 
     return 0;
 }
