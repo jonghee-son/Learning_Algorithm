@@ -9,7 +9,7 @@ using namespace std;
 
 bool info[50][19] = { 0, };
 
-int main(void) {
+int main(int argc, char** argv) {
         vector<pair<string, int>> name_room;
         vector<string> name_room_sorted;
         int num_room = 0, num_meeting = 0;
@@ -95,7 +95,7 @@ int main(void) {
                         cout << res.size() << " available:\n";
 
                         for (int j = 0; j < res.size(); j++) {
-                                printf("%02d-%02d\n", res.at(j).first, res.at(j).second - 1);
+                                printf("%02d-%02d\n", res.at(j).first, res.at(j).second + 1);
                         }
                 }
 
@@ -106,4 +106,3 @@ int main(void) {
 
         return 0;
 }
-
